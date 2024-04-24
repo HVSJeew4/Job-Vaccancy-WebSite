@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import JobListC from './JobListC';
 import Spinner from './Spinner';
 
-const JobList = ({ isHome = false }) => {
+const JobList = ({ isHome = true}) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +13,7 @@ const JobList = ({ isHome = false }) => {
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        setJobs(data);
+        setJobs(data.jobs);
       } catch (error) {
         console.log('Error fetching data', error);
       } finally {

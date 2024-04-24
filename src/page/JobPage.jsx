@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const JobPage = ({ deleteJob }) => {
   const navigate = useNavigate();
-  const job = useLoaderData(); // Removed the unused 'id' variable
+  const job = useLoaderData();
 
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
