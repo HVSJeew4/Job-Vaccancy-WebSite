@@ -3,26 +3,30 @@ import PropTypes from 'prop-types';
 import JobListC from './JobListC';
 import Spinner from './Spinner';
 
-const JobList = ({ isHome = true}) => {
+const JobList = ({ isHome = false}) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const apiUrl = isHome ? '/api/jobs?_limit=3' : '/api/jobs';
+      const apiUrl = isHome ?'/api/jobs?_limit=5' : '/api/jobs';
       try {
         const res = await fetch(apiUrl);
+        if (!res.ok) {
+          throw new Error('Failed to fetch jobs');
+        }
         const data = await res.json();
-        setJobs(data.jobs);
+        setJobs(data);
       } catch (error) {
-        console.log('Error fetching data', error);
+        console.error('Error fetching data:', error);
+        // Handle the error, e.g., display an error message to the user
       } finally {
         setLoading(false);
       }
     };
-
     fetchJobs();
   },);
+  
 
   return (
     <section className='bg-blue-50 px-4 py-10'>
