@@ -1,12 +1,12 @@
-import { useParams, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 const JobPage = ({ deleteJob }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const job = useLoaderData();
+  const job = useLoaderData(); // Removed the unused 'id' variable
 
   const onDeleteClick = (jobId) => {
     const confirm = window.confirm(
@@ -24,7 +24,7 @@ const JobPage = ({ deleteJob }) => {
 
   return (
     <>
-      <section>
+       <section>
         <div className='container m-auto py-6 px-6'>
           <Link
             to='/jobs'
@@ -109,6 +109,10 @@ const JobPage = ({ deleteJob }) => {
       </section>
     </>
   );
+};
+
+JobPage.propTypes = {
+  deleteJob: PropTypes.func.isRequired,
 };
 
 const jobLoader = async ({ params }) => {
